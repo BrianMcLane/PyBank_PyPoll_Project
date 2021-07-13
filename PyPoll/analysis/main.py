@@ -58,5 +58,5 @@ with open(pypoll_csv,"r") as PyPoll:
    
 
 
-print(f" Election Results \n -------------------- \n Total Votes: {vote_count} \n -------------------- \n {voting_booth[0]}: {Khan_perc} ({Khan}) \n {voting_booth[1]}: {Correy_perc} ({Correy}) \n {voting_booth[2]}: {Li_perc} ({Li}) \n {voting_booth[3]}: {OTooley_perc} ({OTooley}) \n -------------------- \n Winner: {Winner}")
+print(f" Election Results \n -------------------- \n Total Votes: {vote_count} \n -------------------- \n {voting_booth[0]}: {Khan_perc}% ({Khan}) \n {voting_booth[1]}: {Correy_perc}% ({Correy}) \n {voting_booth[2]}: {Li_perc}% ({Li}) \n {voting_booth[3]}: {OTooley_perc}% ({OTooley}) \n -------------------- \n Winner: {Winner}")
 
