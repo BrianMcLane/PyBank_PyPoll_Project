@@ -45,28 +45,19 @@ with open(pypoll_csv,"r") as PyPoll:
     Li_perc = round(((Li / vote_count) * 100), 3)
     OTooley_perc = round(((OTooley / vote_count) * 100), 3)
     
-    
-    
-    
     #print(vote_count) # 3521001 
     #print(voting_booth)
+    #print(voting_booth[0], Khan_perc, Khan)
+    #print(voting_booth[1], Correy_perc, Correy)
+    #print(voting_booth[2], Li_perc, Li)
+    #print(voting_booth[3], OTooley_perc, OTooley)
     #print(Winner)
+   
 
-results = (f" Election Results \n -------------------- \n Total Votes: {vote_count} \n -------------------- \n {voting_booth[0]}: {Khan_perc} ({Khan}) \n {voting_booth[1]}: {Correy_perc} ({Correy}) \n {voting_booth[2]}: {Li_perc} ({Li}) \n {voting_booth[3]}: {OTooley_perc} ({OTooley}) \n -------------------- \n Winner: {Winner}")
+
+results = (f" Election Results \n -------------------- \n Total Votes: {vote_count} \n -------------------- \n {voting_booth[0]}: {Khan_perc}% ({Khan}) \n {voting_booth[1]}: {Correy_perc}% ({Correy}) \n {voting_booth[2]}: {Li_perc}% ({Li}) \n {voting_booth[3]}: {OTooley_perc}% ({OTooley}) \n -------------------- \n Winner: {Winner}")
 print(results)
 
-#output_path = os.path.join("..", "PyPoll", "analysis", "election_analysis.txt")
 output_path = os.path.join("election_analysis.txt")
 with open(output_path, "w") as final:
     final.write(str(results)) 
-
-
-# Shaun's Snippet 
-# with open("output.txt", "w") as output:
-#     print("Something", file=output)
-#     output.write("Something else")
-
-# Tutor Snippet 
-# with open('file_to_output', "w") as txt_file:
-#         #put your election results output here-
-# txt_file.write("your_output_name")

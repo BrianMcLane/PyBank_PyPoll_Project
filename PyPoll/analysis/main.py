@@ -8,55 +8,44 @@ with open(pypoll_csv,"r") as PyPoll:
 
     next(pypoll_reader)
 
-    voting_booth = []
-    vote_count = 0
-    Khan = 0 
-    Correy = 0
-    Li = 0
-    OTooley = 0
+    candidate_options = []
+    candidate_votes = {}
     winning_count = 0
+    winner = ""
+    vote_count = 0
 
-    for row in  pypoll_reader:
-        vote_count = vote_count + 1
-        if row[2] not in voting_booth:
-            voting_booth.append(row[2])
-        
-        if row[2] == voting_booth[0]:
-            Khan += 1
-        elif row[2] == voting_booth[1]:
-            Correy += 1
-        elif row[2] == voting_booth[2]:
-            Li += 1
-        else:
-            OTooley += 1
-        
-        if Khan > Correy and Khan > Li and Khan > OTooley:
-            Winner = voting_booth[0]
-        elif Correy > Khan and Correy > Li and Correy > OTooley:
-            Winner = voting_booth[1]
-        elif Li > Khan and Li > Correy and Li > OTooley:
-            Winner = voting_booth[2]
-        elif OTooley > Khan and OTooley > Correy and OTooley > Li:
-            Winner = voting_booth[3]
-        
+    for row in pypoll_reader:
+        vote_count += 1
+        candidate_name = row[2]
+        if candidate_name not in candidate_votes:
+            candidate_options.append(candidate_name)
+            candidate_votes[candidate_name] = 0
+        if candidate_votes[candidate_name] > winning_count:
+            winning_count = candidate_votes[candidate_name]
+            winner = candidate_name
+        candidate_votes[candidate_name] += 1
+    # print(winning_count)
+    # print(winner)
     
-    Khan_perc = round(((Khan / vote_count) * 100), 3)
-    Correy_perc = round(((Correy / vote_count) * 100), 3)
-    Li_perc = round(((Li / vote_count) * 100), 3)
-    OTooley_perc = round(((OTooley / vote_count) * 100), 3)
+    khan = candidate_votes["Khan"] 
+    correy = candidate_votes["Correy"] 
+    li = candidate_votes["Li"]  
+    otooley = candidate_votes["O'Tooley"] 
+
     
+    kp = round(((khan/ vote_count) * 100), 3) # 63.0
+    cp = round(((correy / vote_count) * 100), 3) # 20.0
+    lp = round(((li / vote_count) * 100), 3) # 14.0 
+    op = round(((otooley / vote_count) * 100), 3) #3.0
     
-    
-    
-    #print(vote_count) # 3521001 
-    #print(voting_booth)
-    #print(voting_booth[0], Khan_perc, Khan)
-    #print(voting_booth[1], Correy_perc, Correy)
-    #print(voting_booth[2], Li_perc, Li)
-    #print(voting_booth[3], OTooley_perc, OTooley)
-    #print(Winner)
+    # print(candidate_options)
+    # print(candidate_votes)
+    # print(kp, cp, lp , op)
    
+    
+results = (f' Election Results \n -------------------- \n Total Votes: {vote_count} \n -------------------- \n {candidate_options[0]}: {kp}% ({khan}) \n {candidate_options[1]}: {cp}% ({correy}) \n {candidate_options[2]}: {lp}% ({li}) \n {candidate_options[3]}: {op}% ({otooley}) \n -------------------- \n Winner: {winner} \n --------------------')
+print(results)
 
-
-print(f" Election Results \n -------------------- \n Total Votes: {vote_count} \n -------------------- \n {voting_booth[0]}: {Khan_perc}% ({Khan}) \n {voting_booth[1]}: {Correy_perc}% ({Correy}) \n {voting_booth[2]}: {Li_perc}% ({Li}) \n {voting_booth[3]}: {OTooley_perc}% ({OTooley}) \n -------------------- \n Winner: {Winner}")
-
+output_path = os.path.join("election_analysis.txt")
+with open(output_path, "w") as final:
+    final.write(str(results)) 

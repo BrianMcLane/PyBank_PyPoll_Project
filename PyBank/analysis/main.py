@@ -41,4 +41,9 @@ with open(pybank_csv,"r") as PyBank:
 
     average_change = round(sum(change_list) / len(change_list), 2) # Finding average change between months
 
-print(f" Financial Analysis \n -------------------- \n Total Months : {month_count} \n Total : {net_profit} \n Averger Change : {average_change} \n Greatest Increase in Profit : {greatest_increase_month} ({greatest_increase}) \n Greatest Decrease in Profit : {greatest_decrease_month} ({greatest_decrease})")
+results = (f" Financial Analysis \n -------------------- \n Total Months : {month_count} \n Total : {net_profit} \n Averger Change : {average_change} \n Greatest Increase in Profit : {greatest_increase_month} ({greatest_increase}) \n Greatest Decrease in Profit : {greatest_decrease_month} ({greatest_decrease})")
+print(results)
+
+output_path = os.path.join("election_analysis.txt")
+with open(output_path, "w") as final:
+    final.write(str(results)) 
